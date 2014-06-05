@@ -1,0 +1,22 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<div class="row">
+    <div class="col-xs-2 col-md-1">
+        <img src="http://placehold.it/80" class="img-circle img-responsive" alt=""/></div>
+    <div class="col-xs-10 col-md-11">
+        <div>
+            <div class="title small">
+                <strong>{{comment.name}}</strong> ({{comment.email}} -
+                <span ng-if="comment.agreedWithSpam" th:text="#{feedback.comments.agreedWithSpam}">spam is ok</span><span ng-if="!comment.agreedWithSpam" th:text="#{feedback.comments.notAgreedWithSpam}">spam is nok</span>),
+                <span th:text="#{feedback.comments.created}">wrote on</span>
+                <strong th:inline="text">{{comment.created | date:'[[#{feedback.comments.dateFormat}]]'}}</strong>
+            </div>
+        </div>
+        <div class="message">
+            {{comment.message}}
+        </div>
+    </div>
+</div>
+
+</html>

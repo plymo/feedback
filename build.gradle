@@ -1,0 +1,116 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'idea'
+apply plugin: 'cargo'
+
+sourceCompatibility = 1.7
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    cargoVersion = "1.3.3"
+    springVersion = "3.2.6.RELEASE"
+    thymeleafVersion = "2.1.2.RELEASE"
+    querydslVersion = "2.9.0"
+}
+
+configurations {
+    querydslapt
+}
+
+dependencies {
+    compile "org.slf4j:slf4j-log4j12:1.7.2"
+    compile "log4j:log4j:1.2.17"
+    compile "org.springframework:spring-context:$springVersion"
+    compile "org.springframework:spring-orm:$springVersion"
+    compile "org.springframework:spring-context:$springVersion"
+    compile "org.springframework:spring-web:$springVersion"
+    compile "org.springframework:spring-webmvc:$springVersion"
+    compile "org.codehaus.jackson:jackson-mapper-asl:1.9.13"
+    compile "org.thymeleaf:thymeleaf:$thymeleafVersion"
+    compile "org.thymeleaf:thymeleaf-spring3:$thymeleafVersion"
+    compile "org.springframework.data:spring-data-jpa:1.2.0.RELEASE"
+    compile "org.springframework.data:spring-data-commons-core:1.4.0.RELEASE"
+    compile "org.hibernate:hibernate-entitymanager:4.1.9.Final"
+    compile "org.hibernate:hibernate-validator:4.3.0.Final"
+    compile "com.intellij:annotations:12.0"
+    compile "joda-time:joda-time:2.3"
+
+    providedCompile "javax.servlet:javax.servlet-api:3.0.1"
+
+    testCompile "junit:junit:4.11"
+    testCompile "com.googlecode.jmockit:jmockit:1.0"
+    testCompile "org.hamcrest:hamcrest-all:1.3"
+    testCompile "org.apache.derby:derby:10.9.1.0"
+
+    cargo "org.codehaus.cargo:cargo-core-uberjar:$cargoVersion",
+            "org.codehaus.cargo:cargo-ant:$cargoVersion"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+        resources {
+            srcDir 'src/test/resources'
+        }
+    }
+    generated {
+        java {
+            srcDirs = ['src/main/generated']
+        }
+    }
+}
+
+idea {
+    module {
+        sourceDirs += file('src/main/generated')
+    }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.gradle.api.plugins:gradle-cargo-plugin:0.6.1"
+    }
+}
+
+cargo {
+    containerId = "tomcat7x"
+    port = 80
+
+    deployable {
+        context = "/feedback"
+    }
+
+    remote {
+        hostname = "devbox"
+        username = "deploy"
+        password = "4kineta"
+    }
+
+}
+
+task buildForOpenShift(type: Copy) {
+    description 'Makes copy of the build/libs/snapshot*.war into the webapps/ROOT.war - needed by OpenShift.'
+    from('build/libs/')
+    into('webapps/')
+    include '*.war'
+    rename '(.+)', 'ROOT.war'
+}
+buildForOpenShift.dependsOn build //TODO: change to build task when test will be ok on OpenShift

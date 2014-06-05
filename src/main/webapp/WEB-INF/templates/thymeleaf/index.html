@@ -1,0 +1,84 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Gimme feedback</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Feedback application"/>
+    <meta name="author" content="www.akineta.cz"/>
+    <link rel="stylesheet" href="../../../resources/plugins/bootstrap/3.1.1/css/bootstrap.min.css"
+          th:href="@{/resources/plugins/bootstrap/3.1.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../../../resources/css/styles.css" th:href="@{/resources/css/styles.css}"/>
+</head>
+
+<body ng-app="feedbackApp">
+
+<!-- Main menu -->
+<div th:fragment="main-menu">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" th:href="@{/}">Gimme feedback <span class="glyphicon glyphicon-comment"></span></a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" th:href="@{/?locale=en}">EN</a></li>
+                    <li><a href="#" th:href="@{/?locale=cs}">CS</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- New feedback message form -->
+<div class="addFeedback">
+    <div class="container">
+        <h1 th:text="#{feedback.form.header}">Add your comment</h1>
+
+        <p th:text="#{feedback.form.annotate}">Write whatever you want, you have 255 characters to describe your feelings.</p>
+
+        <div class="panel panel-default" ng-controller="FeedbackController">
+            <div class="panel-body" ng-include="" src="'feedback-form.html'"></div>
+        </div>
+    </div>
+</div>
+
+<!-- All feedback comments -->
+<div class="feedbackComments container">
+    <div class="panel panel-default widget">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> <span th:text="#{feedback.comments.header}">Hot Feedback Comments</span></h3>
+        </div>
+        <div class="panel-body" ng-controller="FeedbackCommentsController">
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="comment in comments" ng-include="" src="'feedback-comments.html'"></li>
+            </ul>
+            <!--<a href="#" class="btn btn-primary btn-lg btn-block" role="button"><span class="glyphicon glyphicon-refresh"></span> More</a>-->
+        </div>
+
+    </div>
+
+    <div class="footer" th:fragment="footer">
+        <hr/>
+        <footer>
+            <p>&copy; Akineta</p>
+        </footer>
+    </div>
+</div>
+
+<div th:fragment="scripts">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../../resources/plugins/bootstrap/3.1.1/js/bootstrap.min.js"
+            th:src="@{/resources/plugins/bootstrap/3.1.1/js/bootstrap.min.js}"></script>
+    <script src="../../../resources/plugins/angular/1.2.16/angular.js"
+            th:src="@{/resources/plugins/angular/1.2.16/angular.js}"></script>
+    <script src="../../../resources/plugins/angular/1.2.16/angular-route.js"
+            th:src="@{/resources/plugins/angular/1.2.16/angular-route.js}"></script>
+    <script src="../../../resources/js/app.js"
+            th:src="@{/resources/js/app.js}"></script>
+</div>
+
+</body>
+</html>

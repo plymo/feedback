@@ -1,0 +1,17 @@
+# Generated files #
+###################
+derby.log
+.out/
+generated/
+
+# Idea files #
+##############
+*.ipr
+*.iml
+*.iws
+.idea/
+
+# Gradle #
+##########
+.gradle
+build/

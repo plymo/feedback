@@ -1,0 +1,41 @@
+body {
+    background: #eeeeee;
+    padding-top: 50px;
+}
+
+.addFeedback {
+}
+
+.feedbackComments {
+    margin-top: 25px;
+}
+
+.input-group {
+    font-size: 120%;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 20px auto;
+}
+
+.alert-holder {
+    margin: 2% 0;
+}
+
+.view-actions {
+    margin-bottom: 10px;
+}
+
+.row {
+    margin-top: 10px;
+}
+
+.footer {
+    padding-top: 20px;
+}
+
+hr {
+    border-color: #000000;
+}

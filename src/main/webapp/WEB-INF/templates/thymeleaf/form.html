@@ -1,0 +1,41 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<form class="form" sex="form" ng-submit="createFeedback()">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label" for="name" th:text="#{feedback.form.name.label}">Name:</label>
+                <input type="text" id="name" name="name" required="" ng-minlength="3" ng-model="feedback.name" class="form-control" placeholder="Name"
+                       th:placeholder="#{feedback.form.name.placeholder}"/>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label" for="email" th:text="#{feedback.form.email.label}">E-mail:</label>
+                <input type="email" id="email" name="email" required="" ng-model="feedback.email" class="form-control" placeholder="E-mail"
+                       th:placeholder="#{feedback.form.email.placeholder}"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="message" th:text="#{feedback.form.message.label}">Message:</label>
+        <textarea id="message" name="message" required="" maxlength="255" ng-minlength="5" ng-maxlength="255" ng-trim="false" ng-model="feedback.message"
+                  class="form-control" placeholder="Message" th:placeholder="#{feedback.form.message.placeholder}"></textarea>
+        <span class="form-help">{{255-feedback.message.length}}</span>
+    </div>
+
+    <div class="checkbox">
+        <label for="agreedWithSpam" th:inline="text"><span th:text="#{feedback.form.agreedWithSpam.label}">I agree with spam</span>
+            <input type="checkbox" id="agreedWithSpam" name="agreedWithSpam" ng-model="feedback.agreedWithSpam"/>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <button type="reset" class="btn btn-default btn-lg" th:text="#{feedback.form.reset}">Reset</button>
+        <button type="submit" class="btn btn-success btn-lg" th:text="#{feedback.form.submit}">Submit</button>
+    </div>
+</form>
+
+</html>
