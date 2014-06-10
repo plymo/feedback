@@ -146,9 +146,8 @@ public class FeedbackControllerTest
 	@Test
 	public void addValidFeedback() throws Exception
 	{
-		Feedback feedback = createValidFeedback();
 
-		verifyValidCreated(feedback);
+		verifyValidCreated(createValidFeedback());
 	}
 
 	private Feedback createValidFeedback()

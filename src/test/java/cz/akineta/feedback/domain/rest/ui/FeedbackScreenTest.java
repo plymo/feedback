@@ -35,15 +35,15 @@ public class FeedbackScreenTest
 	@Test
 	public void addNewFeedbackSpamIsOkSuccessfully(@InitialPage FeedbackPage feedbackPage)
 	{
-		feedbackPage.addFeedback("Peter Jimbosh", "peter@jimbosh.com", "New comment added.", true);
-		assertThat(feedbackPage.commentExists("Peter Jimbosh", "peter@jimbosh.com", "New comment added.", true), is(true));
+		feedbackPage.addFeedback("Peter Jimbosh", "peter@jimbosh.com", "New comment added - agreed with spam.", true);
+		assertThat(feedbackPage.commentExists("Peter Jimbosh", "peter@jimbosh.com", "New comment added - agreed with spam.", true), is(true));
 	}
 
 	@Test
 	public void addNewFeedbackSpamIsNokSuccessfully(@InitialPage FeedbackPage feedbackPage)
 	{
-		feedbackPage.addFeedback("Peter Jimbosh", "peter@jimbosh.com", "New comment added.", false);
-		assertThat(feedbackPage.commentExists("Peter Jimbosh", "peter@jimbosh.com", "New comment added.", false), is(true));
+		feedbackPage.addFeedback("Peter Jimbosh", "peter@jimbosh.com", "New comment added - not agreed with spam.", false);
+		assertThat(feedbackPage.commentExists("Peter Jimbosh", "peter@jimbosh.com", "New comment added - not agreed with spam.", false), is(true));
 	}
 
 	@Test
@@ -70,8 +70,8 @@ public class FeedbackScreenTest
 	@Test
 	public void jsInjection(@InitialPage FeedbackPage feedbackPage)
 	{
-		feedbackPage.addFeedback("javascript:alert('Hi.')", "valid@email", "Robur has added some comment.", true);
-		assertThat(feedbackPage.commentExists("javascript:alert('Hi.')", "valid@email", "Robur has added some comment.", true), is(true));
+		feedbackPage.addFeedback("<script type=\"text/javascript\">alert('Hi.')</script>", "valid@email", "Robur has added some comment.", true);
+		assertThat(feedbackPage.commentExists("<script type=\"text/javascript\">alert('Hi.')</script>", "valid@email", "Robur has added some comment.", true), is(true));
 	}
 
 	@Test
