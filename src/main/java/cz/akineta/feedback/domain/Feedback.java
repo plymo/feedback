@@ -26,7 +26,6 @@ public class Feedback
 	@Size(min = 3, max = 255, message = "{feedback.validation.name}")
 	private String name;
 	@NotNull(message = "{feedback.validation.email}")
-	@Size(min = 5, max = 255, message = "{feedback.validation.email}")
 	@Email(message = "{feedback.validation.email}")
 	private String email;
 	@NotNull(message = "{feedback.validation.message}")

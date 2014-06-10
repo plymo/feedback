@@ -1,0 +1,9 @@
+<arquillian>
+    <extension qualifier="webdriver">
+        <property name="browser">chrome</property>
+        <!--<property name="remoteReusable">true</property>-->
+        <property name="contextRoot">http://devbox/feedback</property>
+        <property name="remoteAddress">http://devbox/feedback</property>
+        <property name="chromeDriverBinary">/home/plymo/devel/fast/chromedriver</property>
+    </extension>
+</arquillian>

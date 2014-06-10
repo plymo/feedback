@@ -33,15 +33,15 @@ public class OpenShiftDataConfig
 	public DataSource dataSource()
 	{
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		String host = env.getRequiredProperty("OPENSHIFT_MYSQL_DB_HOST"); //System.getenv("OPENSHIFT_MYSQL_DB_HOST");
-		String port = env.getRequiredProperty("OPENSHIFT_MYSQL_DB_PORT"); //System.getenv("OPENSHIFT_MYSQL_DB_PORT");
-		String appName = env.getRequiredProperty("OPENSHIFT_APP_NAME"); //System.getenv("OPENSHIFT_APP_NAME");
+		String host = env.getRequiredProperty("OPENSHIFT_MYSQL_DB_HOST");
+		String port = env.getRequiredProperty("OPENSHIFT_MYSQL_DB_PORT");
+		String appName = env.getRequiredProperty("OPENSHIFT_APP_NAME");
 		String jdbcUrl = "jdbc:mysql://" + host + ":" + port + "/" + appName;
 
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl(jdbcUrl);
-		dataSource.setUsername(env.getRequiredProperty("OPENSHIFT_MYSQL_DB_USERNAME"));//System.getenv("OPENSHIFT_MYSQL_DB_USERNAME"));
-		dataSource.setPassword(env.getRequiredProperty("OPENSHIFT_MYSQL_DB_PASSWORD")); //System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD"));
+		dataSource.setUsername(env.getRequiredProperty("OPENSHIFT_MYSQL_DB_USERNAME"));
+		dataSource.setPassword(env.getRequiredProperty("OPENSHIFT_MYSQL_DB_PASSWORD"));
 
 		return dataSource;
 	}

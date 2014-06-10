@@ -10,8 +10,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 
 /**
@@ -72,25 +74,33 @@ public class FeedbackController
 	@ExceptionHandler(FeedbackNotFoundException.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	@ResponseBody
-	public String handleFeedbackNotFoundException(Locale locale, FeedbackNotFoundException exception)
+	public Map<String, String> handleFeedbackNotFoundException(Locale locale, FeedbackNotFoundException exception)
 	{
-		return messageSource.getMessage("feedback.exception.notFound", null, locale);
+		return createError(locale, "feedback.exception.notFound");
 	}
 
 	@ExceptionHandler(FeedbackValidationException.class)
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	@ResponseBody
-	public List<String> handleFeedbackValidationException(FeedbackValidationException exception)
+	public List<FieldValidationError> handleFeedbackValidationException(FeedbackValidationException exception)
 	{
-		return exception.getLocalizedMessages();
+		return exception.getLocalizedErrors();
 	}
 
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	@ResponseBody
-	public String handleException(Locale locale, Exception exception)
+	public Map<String, String> handleException(Locale locale, Exception exception)
 	{
-		return messageSource.getMessage("feedback.exception.badRequest", null, locale);
+		return createError(locale, "feedback.exception.badRequest");
+	}
+
+	private Map<String, String> createError(Locale locale, String l10nKey)
+	{
+		Map<String, String> errorMap = new HashMap<>();
+		errorMap.put("error", messageSource.getMessage(l10nKey, null, locale));
+
+		return errorMap;
 	}
 
 }

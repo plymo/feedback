@@ -21,16 +21,16 @@ public class FeedbackValidationException extends RuntimeException
 		this.fieldErrors = fieldErrors;
 	}
 
-	public List<String> getLocalizedMessages()
+	public List<FieldValidationError> getLocalizedErrors()
 	{
-		List<String> l10nErrorMessages = new ArrayList<>();
+		List<FieldValidationError> l10nErrors = new ArrayList<>();
 
 		for (FieldError fieldError : fieldErrors)
 		{
-			l10nErrorMessages.add(fieldError.getDefaultMessage());
+			l10nErrors.add(new FieldValidationError(fieldError.getField(), fieldError.getDefaultMessage()));
 		}
 
-		return l10nErrorMessages;
+		return l10nErrors;
 	}
 
 }

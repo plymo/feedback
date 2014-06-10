@@ -10,6 +10,10 @@ body {
     margin-top: 25px;
 }
 
+.noComments {
+    padding: 0px 10px 10px 10px;
+}
+
 .input-group {
     font-size: 120%;
 }

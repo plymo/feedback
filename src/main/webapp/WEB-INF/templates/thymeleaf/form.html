@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
-<form class="form" sex="form" ng-submit="createFeedback()">
+<form class="form" sex="form" ng-submit="createFeedback()" id="feedbackForm">
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -28,7 +28,7 @@
 
     <div class="checkbox">
         <label for="agreedWithSpam" th:inline="text"><span th:text="#{feedback.form.agreedWithSpam.label}">I agree with spam</span>
-            <input type="checkbox" id="agreedWithSpam" name="agreedWithSpam" ng-model="feedback.agreedWithSpam"/>
+            <input type="checkbox" checked="checked" id="agreedWithSpam" name="agreedWithSpam" ng-model="feedback.agreedWithSpam"/>
         </label>
     </div>
 
