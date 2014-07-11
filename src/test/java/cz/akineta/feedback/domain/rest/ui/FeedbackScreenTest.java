@@ -47,21 +47,21 @@ public class FeedbackScreenTest
 	}
 
 	@Test
-	public void addNewFeedbackIvalidName(@InitialPage FeedbackPage feedbackPage)
+	public void addNewFeedbackInvalidName(@InitialPage FeedbackPage feedbackPage)
 	{
-		feedbackPage.addFeedback("", "ivalid email", "Robur has added some comment.", true);
-		assertThat(feedbackPage.commentExists("", "ivalid email", "Robur has added some comment.", true), is(false));
+		feedbackPage.addFeedback("", "valid@email", "Robur has added some comment.", true);
+		assertThat(feedbackPage.commentExists("", "valid@email", "Robur has added some comment.", true), is(false));
 	}
 
 	@Test
-	public void addNewFeedbackIvalidEmail(@InitialPage FeedbackPage feedbackPage)
+	public void addNewFeedbackInvalidEmail(@InitialPage FeedbackPage feedbackPage)
 	{
-		feedbackPage.addFeedback("Robur Dobyvatel", "ivalid email", "Robur has added some comment.", true);
-		assertThat(feedbackPage.commentExists("Robur Dobyvatel", "ivalid email", "Robur has added some comment.", true), is(false));
+		feedbackPage.addFeedback("Robur Dobyvatel", "invalid email", "Robur has added some comment.", true);
+		assertThat(feedbackPage.commentExists("Robur Dobyvatel", "invalid email", "Robur has added some comment.", true), is(false));
 	}
 
 	@Test
-	public void addNewFeedbackIvalidMessage(@InitialPage FeedbackPage feedbackPage)
+	public void addNewFeedbackInvalidMessage(@InitialPage FeedbackPage feedbackPage)
 	{
 		feedbackPage.addFeedback("Robur Dobyvatel", "valid@email", "", true);
 		assertThat(feedbackPage.commentExists("Robur Dobyvatel", "valid@email", "", true), is(false));
