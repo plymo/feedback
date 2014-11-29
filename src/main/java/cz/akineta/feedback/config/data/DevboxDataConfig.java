@@ -43,12 +43,6 @@ public class DevboxDataConfig
 	}
 
 	@Bean
-	public HibernatePersistence persistenceProvider()
-	{
-		return new HibernatePersistence();
-	}
-
-	@Bean
 	public HibernateJpaVendorAdapter jpaVendorAdapter()
 	{
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
